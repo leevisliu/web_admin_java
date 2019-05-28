@@ -1,31 +1,73 @@
+(function($) {
+    "use strict";
 
-jQuery(document).ready(function() {
 
-    $('.page-container form').submit(function(){
-        var username = $(this).find('.username').val();
-        var password = $(this).find('.password').val();
-        if(username == '') {
-            $(this).find('.error').fadeOut('fast', function(){
-                $(this).css('top', '27px');
-            });
-            $(this).find('.error').fadeIn('fast', function(){
-                $(this).parent().find('.username').focus();
-            });
-            return false;
-        }
-        if(password == '') {
-            $(this).find('.error').fadeOut('fast', function(){
-                $(this).css('top', '96px');
-            });
-            $(this).find('.error').fadeIn('fast', function(){
-                $(this).parent().find('.password').focus();
-            });
-            return false;
+    $(function () {
+        for (var nk = window.location, o = $(".nano-content li a").filter(function () {
+            return this.href == nk;
+        })
+            .addClass("active")
+            .parent()
+            .addClass("active"); ;) {
+            if (!o.is("li")) break;
+            o = o.parent()
+                .addClass("d-block")
+                .parent()
+                .addClass("active");
         }
     });
 
-    $('.page-container form .username, .page-container form .password').keyup(function(){
-        $(this).parent().find('.error').fadeOut('fast');
+
+    /* 
+    ------------------------------------------------
+    Sidebar open close animated humberger icon
+    ------------------------------------------------*/
+
+    $(".hamburger").on('click', function() {
+        $(this).toggleClass("is-active");
     });
 
-});
+
+
+
+
+    /* TO DO LIST 
+    --------------------*/
+    $(".tdl-new").on('keypress', function(e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) {
+            var v = $(this).val();
+            var s = v.replace(/ +?/g, '');
+            if (s == "") {
+                return false;
+            } else {
+                $(".tdl-content ul").append("<li><label><input type='checkbox'><i></i><span>" + v + "</span><a href='#' class='ti-close'></a></label></li>");
+                $(this).val("");
+            }
+        }
+    });
+
+
+    $(".tdl-content a").on("click", function() {
+        var _li = $(this).parent().parent("li");
+        _li.addClass("remove").stop().delay(100).slideUp("fast", function() {
+            _li.remove();
+        });
+        return false;
+    });
+
+    // for dynamically created a tags
+    $(".tdl-content").on('click', "a", function() {
+        var _li = $(this).parent().parent("li");
+        _li.addClass("remove").stop().delay(100).slideUp("fast", function() {
+            _li.remove();
+        });
+        return false;
+    });
+
+
+    
+
+
+
+})(jQuery);

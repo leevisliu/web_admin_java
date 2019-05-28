@@ -3,9 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 设置为IUserDao接口方法提供sql语句配置 -->
-<mapper namespace="com.xiao.dao.UserDao">
+<mapper namespace="com.neween.dao.UserDao">
 
-    <select id="selectUserById" resultType="com.xiao.entity.User" parameterType="long">
+    <select id="selectUserById" resultType="com.neween.entity.User" parameterType="long">
         SELECT * FROM user WHERE id = #{id}
     </select>
 </mapper>
